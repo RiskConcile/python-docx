@@ -210,6 +210,9 @@ class _Cell(BlockItemContainer):
         """
         return super(_Cell, self).add_paragraph(text, style)
 
+    def set_background_color(self, color):
+        self._tc.set_background_color(color)
+
     def add_table(self, rows, cols):
         """
         Return a table newly added to this cell after any existing cell

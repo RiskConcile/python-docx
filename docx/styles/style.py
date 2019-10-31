@@ -245,7 +245,7 @@ class _ParagraphStyle(_CharacterStyle):
         return ParagraphFormat(self._element)
 
 
-class _TableStyle(_ParagraphStyle):
+class _TableStyle(BaseStyle):
     """
     A table style. A table style provides character and paragraph formatting
     for its contents as well as special table formatting properties.
@@ -256,6 +256,16 @@ class _TableStyle(_ParagraphStyle):
     def __repr__(self):
         return '_TableStyle(\'%s\') id: %s' % (self.name, id(self))
 
+    def add_borders(self):
+        tblPr = self.element.get_or_add_tblPr()
+        tblBorders = tblPr.get_or_add_tblBorders()
+        tblBorders.add_all_borders()
+        return self.element
+
+    def set_border_color(self, color):
+        tblPr = self.element.get_or_add_tblPr()
+        tblBorders = tblPr.get_or_add_tblBorders()
+        tblBorders.set_border_color(color)
 
 class _NumberingStyle(BaseStyle):
     """

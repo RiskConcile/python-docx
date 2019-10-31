@@ -203,6 +203,8 @@ class XmlEnumeration(Enumeration):
         Return the XML value of the enumeration value *enum_val*.
         """
         if enum_val not in cls._member_to_xml:
+            print(str(cls._member_to_xml))
+
             raise ValueError(
                 "value '%s' not in enumeration %s" % (enum_val, cls.__name__)
             )

@@ -12,7 +12,7 @@ from ..exceptions import InvalidSpanError
 from .ns import nsdecls, qn
 from ..shared import Emu, Twips
 from .simpletypes import (
-    ST_Merge, ST_TblLayoutType, ST_TblWidth, ST_TwipsMeasure, XsdInt
+    ST_Merge, ST_TblLayoutType, ST_TblWidth, ST_TwipsMeasure, XsdInt, XsdString
 )
 from .xmlchemy import (
     BaseOxmlElement, OneAndOnlyOne, OneOrMore, OptionalAttribute,
@@ -281,6 +281,7 @@ class CT_TblPr(BaseOxmlElement):
     tblStyle = ZeroOrOne('w:tblStyle', successors=_tag_seq[1:])
     bidiVisual = ZeroOrOne('w:bidiVisual', successors=_tag_seq[4:])
     jc = ZeroOrOne('w:jc', successors=_tag_seq[8:])
+    tblBorders = ZeroOrOne('w:tblBorders', successors=_tag_seq[11:])
     tblLayout = ZeroOrOne('w:tblLayout', successors=_tag_seq[13:])
     del _tag_seq
 
@@ -339,6 +340,93 @@ class CT_TblPr(BaseOxmlElement):
         self._add_tblStyle(val=value)
 
 
+class CT_TblBorders(BaseOxmlElement):
+    """
+    ``<w:tblBorders>`` element, child of ``<w:tblPr>``, holds child elements that
+    define table border properties such as borderwidth and bordercolor.
+    """
+    _tag_seq = (
+        'w:top', 'w:left', 'w:bottom', 'w:right', 'w:insideH', 'w:insideV'
+    )
+    borderTop = ZeroOrOne('w:top', successors=_tag_seq[1:])
+    borderLeft = ZeroOrOne('w:left', successors=_tag_seq[2:])
+    borderBottom = ZeroOrOne('w:bottom', successors=_tag_seq[3:])
+    borderRight = ZeroOrOne('w:right', successors=_tag_seq[4:])
+    borderInsideH = ZeroOrOne('w:insideH', successors=_tag_seq[5:])
+    borderInsideV = ZeroOrOne('w:insideV', successors=_tag_seq[5:])
+    del _tag_seq
+
+    def add_all_borders(self):
+        sides = []
+
+        sides.append(self.get_or_add_borderTop())
+        sides.append(self.get_or_add_borderLeft())
+        sides.append(self.get_or_add_borderBottom())
+        sides.append(self.get_or_add_borderRight())
+        sides.append(self.get_or_add_borderInsideH())
+        sides.append(self.get_or_add_borderInsideV())
+
+        for side in sides:
+            side.val = "single"
+            side.sz = 4
+            side.space = 0
+            side.color = "000000"
+
+
+    def set_border_color(self, color):
+        sides = []
+
+        sides.append(self.get_or_add_borderTop())
+        sides.append(self.get_or_add_borderLeft())
+        sides.append(self.get_or_add_borderBottom())
+        sides.append(self.get_or_add_borderRight())
+        sides.append(self.get_or_add_borderInsideH())
+        sides.append(self.get_or_add_borderInsideV())
+
+        for side in sides:
+            side.val = "single"
+            side.sz = 4
+            side.space = 0
+            side.color = color
+        
+        
+
+class CT_TblBorderTop(BaseOxmlElement):
+    val = RequiredAttribute('w:val', XsdString)
+    sz = RequiredAttribute('w:sz', XsdInt)
+    space = RequiredAttribute('w:space', XsdInt)
+    color = RequiredAttribute('w:color', XsdString)
+
+class CT_TblBorderLeft(BaseOxmlElement):
+    val = RequiredAttribute('w:val', XsdString)
+    sz = RequiredAttribute('w:sz', XsdInt)
+    space = RequiredAttribute('w:space', XsdInt)
+    color = RequiredAttribute('w:color', XsdString)
+
+class CT_TblBorderRight(BaseOxmlElement):
+    val = RequiredAttribute('w:val', XsdString)
+    sz = RequiredAttribute('w:sz', XsdInt)
+    space = RequiredAttribute('w:space', XsdInt)
+    color = RequiredAttribute('w:color', XsdString)
+
+class CT_TblBorderBottom(BaseOxmlElement):
+    val = RequiredAttribute('w:val', XsdString)
+    sz = RequiredAttribute('w:sz', XsdInt)
+    space = RequiredAttribute('w:space', XsdInt)
+    color = RequiredAttribute('w:color', XsdString)
+
+class CT_TblBorderInsideH(BaseOxmlElement):
+    val = RequiredAttribute('w:val', XsdString)
+    sz = RequiredAttribute('w:sz', XsdInt)
+    space = RequiredAttribute('w:space', XsdInt)
+    color = RequiredAttribute('w:color', XsdString)
+
+class CT_TblBorderInsideV(BaseOxmlElement):
+    val = RequiredAttribute('w:val', XsdString)
+    sz = RequiredAttribute('w:sz', XsdInt)
+    space = RequiredAttribute('w:space', XsdInt)
+    color = RequiredAttribute('w:color', XsdString)
+
 class CT_TblWidth(BaseOxmlElement):
     """
     Used for ``<w:tblW>`` and ``<w:tcW>`` elements and many others, to
@@ -386,6 +474,9 @@ class CT_Tc(BaseOxmlElement):
             if tc_below is not None and tc_below.vMerge == ST_Merge.CONTINUE:
                 return tc_below.bottom
         return self._tr_idx + 1
+
+    def set_background_color(self, color):
+        self.get_or_add_tcPr().set_background_color(color)
 
     def clear_content(self):
         """
@@ -748,6 +839,12 @@ class CT_Tc(BaseOxmlElement):
         return self._tbl.tr_lst.index(self._tr)
 
 
+class CT_Shd(BaseOxmlElement):
+    val = OptionalAttribute('w:val', XsdString)
+    color = RequiredAttribute('w:color', XsdString)
+    fill = RequiredAttribute('w:fill', XsdString)
+    themeFill = RequiredAttribute('w:themeFill', XsdString)
+
 class CT_TcPr(BaseOxmlElement):
     """
     ``<w:tcPr>`` element, defining table cell properties
@@ -762,6 +859,7 @@ class CT_TcPr(BaseOxmlElement):
     gridSpan = ZeroOrOne('w:gridSpan', successors=_tag_seq[3:])
     vMerge = ZeroOrOne('w:vMerge', successors=_tag_seq[5:])
     vAlign = ZeroOrOne('w:vAlign', successors=_tag_seq[12:])
+    shd = ZeroOrOne('w:shd', successors=_tag_seq[7:])
     del _tag_seq
 
     @property
@@ -774,6 +872,12 @@ class CT_TcPr(BaseOxmlElement):
         if gridSpan is None:
             return 1
         return gridSpan.val
+
+    def set_background_color(self, color):
+        shd = self.get_or_add_shd()
+        print(shd)
+        shd.fill = color
+        shd.color = "auto"
 
     @grid_span.setter
     def grid_span(self, value):

@@ -157,7 +157,15 @@ from .table import (  # noqa
     CT_TblGridCol,
     CT_TblLayoutType,
     CT_TblPr,
+    CT_TblBorders,
+    CT_TblBorderTop,
+    CT_TblBorderLeft,
+    CT_TblBorderRight,
+    CT_TblBorderBottom,
+    CT_TblBorderInsideH,
+    CT_TblBorderInsideV,
     CT_TblWidth,
+    CT_Shd,
     CT_Tc,
     CT_TcPr,
     CT_TrPr,
@@ -171,10 +179,18 @@ register_element_cls('w:tbl',        CT_Tbl)
 register_element_cls('w:tblGrid',    CT_TblGrid)
 register_element_cls('w:tblLayout',  CT_TblLayoutType)
 register_element_cls('w:tblPr',      CT_TblPr)
+register_element_cls('w:tblBorders', CT_TblBorders)
+register_element_cls('w:top' ,       CT_TblBorderTop)
+register_element_cls('w:left' ,      CT_TblBorderLeft)
+register_element_cls('w:bottom' ,    CT_TblBorderBottom)
+register_element_cls('w:right' ,     CT_TblBorderRight)
+register_element_cls('w:insideH' ,   CT_TblBorderInsideH)
+register_element_cls('w:insideV' ,   CT_TblBorderInsideV)
 register_element_cls('w:tblStyle',   CT_String)
 register_element_cls('w:tc',         CT_Tc)
 register_element_cls('w:tcPr',       CT_TcPr)
 register_element_cls('w:tcW',        CT_TblWidth)
+register_element_cls('w:shd',        CT_Shd)
 register_element_cls('w:tr',         CT_Row)
 register_element_cls('w:trHeight',   CT_Height)
 register_element_cls('w:trPr',       CT_TrPr)

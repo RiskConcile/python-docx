@@ -126,6 +126,7 @@ class CT_Style(BaseOxmlElement):
     locked = ZeroOrOne('w:locked', successors=_tag_seq[12:])
     pPr = ZeroOrOne('w:pPr', successors=_tag_seq[17:])
     rPr = ZeroOrOne('w:rPr', successors=_tag_seq[18:])
+    tblPr = ZeroOrOne('w:tblPr', successors=_tag_seq[19:])
     del _tag_seq
 
     type = OptionalAttribute('w:type', WD_STYLE_TYPE)
