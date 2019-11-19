@@ -59,6 +59,14 @@ class Table(Parented):
         self._tblPr.alignment = value
 
     @property
+    def textWrap(self):
+        return self._tblPr.textWrap
+
+    @textWrap.setter
+    def textWrap(self, value):
+        self._tblPr.textWrap = value
+
+    @property
     def autofit(self):
         """
         |True| if column widths can be automatically adjusted to improve the

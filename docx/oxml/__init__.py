@@ -157,6 +157,8 @@ from .table import (  # noqa
     CT_TblGridCol,
     CT_TblLayoutType,
     CT_TblPr,
+    CT_TblpPr,
+    CT_TblOverlap,
     CT_TblBorders,
     CT_TblBorderTop,
     CT_TblBorderLeft,
@@ -179,6 +181,8 @@ register_element_cls('w:tbl',        CT_Tbl)
 register_element_cls('w:tblGrid',    CT_TblGrid)
 register_element_cls('w:tblLayout',  CT_TblLayoutType)
 register_element_cls('w:tblPr',      CT_TblPr)
+register_element_cls('w:tblpPr',     CT_TblpPr)
+register_element_cls('w:tblOverlap', CT_TblOverlap)
 register_element_cls('w:tblBorders', CT_TblBorders)
 register_element_cls('w:top' ,       CT_TblBorderTop)
 register_element_cls('w:left' ,      CT_TblBorderLeft)

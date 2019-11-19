@@ -279,6 +279,8 @@ class CT_TblPr(BaseOxmlElement):
         'w:tblDescription', 'w:tblPrChange'
     )
     tblStyle = ZeroOrOne('w:tblStyle', successors=_tag_seq[1:])
+    tblpPr = ZeroOrOne('w:tblpPr', successors=_tag_seq[2:])
+    tblOverlap = ZeroOrOne('w:tblOverlap', successors=_tag_seq[3:])
     bidiVisual = ZeroOrOne('w:bidiVisual', successors=_tag_seq[4:])
     jc = ZeroOrOne('w:jc', successors=_tag_seq[8:])
     tblBorders = ZeroOrOne('w:tblBorders', successors=_tag_seq[11:])
@@ -304,6 +306,25 @@ class CT_TblPr(BaseOxmlElement):
             return
         jc = self.get_or_add_jc()
         jc.val = value
+
+    @property
+    def textWrap(self):
+        tw = self.tblpPr
+        if tw is None:
+            return
+        return tw
+
+    @textWrap.setter
+    def textWrap(self, value):
+        self._remove_tblpPr()
+        if value is None:
+            return
+        tw = self.get_or_add_tblpPr()
+        tw.vertAnchor = value
+        tw.tblpY = 1
+
+        ol = self.get_or_add_tblOverlap()
+        ol.val = "never"
 
     @property
     def autofit(self):
@@ -338,6 +359,27 @@ class CT_TblPr(BaseOxmlElement):
         if value is None:
             return
         self._add_tblStyle(val=value)
+
+
+class CT_TblpPr(BaseOxmlElement):
+    """
+    ``<w:tblpPr>`` element, child of ``<w:tblPr>``, defines floating tables
+    Ref: http://officeopenxml.com/WPfloatingTables.php
+    """
+    bottomFromText = OptionalAttribute('w:bottomFromText', XsdInt)
+    topFromText = OptionalAttribute('w:topFromText', XsdInt)
+    leftFromText = OptionalAttribute('w:leftFromText', XsdInt)
+    rightFromText = OptionalAttribute('w:rightFromText', XsdInt)
+    vertAnchor = OptionalAttribute('w:vertAnchor', XsdString)
+    tblpY = OptionalAttribute('w:tblpY', XsdInt)
+
+
+class CT_TblOverlap(BaseOxmlElement):
+    """
+    Used in combination with <w:tblpPr>
+    Ref:http://officeopenxml.com/WPfloatingTables.php
+    """
+    val = RequiredAttribute('w:val', XsdString)
 
 
 class CT_TblBorders(BaseOxmlElement):
@@ -875,7 +917,6 @@ class CT_TcPr(BaseOxmlElement):
 
     def set_background_color(self, color):
         shd = self.get_or_add_shd()
-        print(shd)
         shd.fill = color
         shd.color = "auto"
 

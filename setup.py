@@ -31,7 +31,7 @@ VERSION = version
 DESCRIPTION = 'Create and update Microsoft Word .docx files.'
 KEYWORDS = 'docx office openxml word'
 AUTHOR = 'Steve Canny'
-AUTHOR_EMAIL = 'python-docx@googlegroups.com'
+AUTHOR_EMAIL = 'python-docx@googlegroups.co'
 URL = 'https://github.com/python-openxml/python-docx'
 LICENSE = text_of('LICENSE')
 PACKAGES = find_packages(exclude=['tests', 'tests.*'])
