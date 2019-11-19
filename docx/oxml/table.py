@@ -285,6 +285,7 @@ class CT_TblPr(BaseOxmlElement):
     jc = ZeroOrOne('w:jc', successors=_tag_seq[8:])
     tblBorders = ZeroOrOne('w:tblBorders', successors=_tag_seq[11:])
     tblLayout = ZeroOrOne('w:tblLayout', successors=_tag_seq[13:])
+    tblCellMar = ZeroOrOne('w:tblCellMar', successors=_tag_seq[14:])
     del _tag_seq
 
     @property
@@ -327,6 +328,21 @@ class CT_TblPr(BaseOxmlElement):
         ol.val = "never"
 
     @property
+    def cellMargins(self):
+        cm = self.tblCellMar
+        if cm is None:
+            return
+        return cm
+
+    @cellMargins.setter
+    def cellMargins(self, value):
+        self._remove_tblCellMar()
+        if value is None:
+            return
+        cm = self.get_or_add_tblCellMar()
+        cm.margins = value
+
+    @property
     def autofit(self):
         """
         Return |False| if there is a ``<w:tblLayout>`` child with ``w:type``
@@ -360,6 +376,80 @@ class CT_TblPr(BaseOxmlElement):
             return
         self._add_tblStyle(val=value)
 
+
+class CT_TblCellMar(BaseOxmlElement):
+    _tag_seq = (
+        'w:top', 'w:left', 'w:bottom', 'w:right'
+    )
+    topMargin = ZeroOrOne('w:top', successors=_tag_seq[1:])
+    leftMargin = ZeroOrOne('w:left', successors=_tag_seq[2:])
+    bottomMargin = ZeroOrOne('w:bottom', successors=_tag_seq[3:])
+    rightMargin = ZeroOrOne('w:right', successors=_tag_seq[3:])
+    del _tag_seq
+
+    @property
+    def margins(self):
+        mar = [None, None, None, None]
+        if not self.topMargin is None:
+            mar[0] = self.topMargin.w
+        if not self.rightMargin is None:
+            mar[1] = self.rightMargin.w
+        if not self.bottomMargin is None:
+            mar[2] = self.bottomMargin.w
+        if not self.leftMargin is None:
+            mar[3] = self.leftMargin.w
+
+        return mar
+
+    @margins.setter
+    def margins(self, value):
+        if value is None:
+            return
+        tm  = self.get_or_add_topMargin()
+        tm.w = value[0]
+        tm.type = "dxa"
+        lm  = self.get_or_add_leftMargin()
+        lm.w = value[3]
+        lm.type = "dxa"
+        bm  = self.get_or_add_bottomMargin()
+        bm.w = value[2]
+        bm.type = "dxa"
+        rm  = self.get_or_add_rightMargin()
+        rm.w = value[1]
+        rm.type = "dxa"
+
+
+class CT_Top(BaseOxmlElement): 
+    w = OptionalAttribute('w:w', XsdInt)
+    type = OptionalAttribute('w:type', XsdString)
+    val = OptionalAttribute('w:val', XsdString)
+    sz = OptionalAttribute('w:sz', XsdInt)
+    space = OptionalAttribute('w:space', XsdInt)
+    color = OptionalAttribute('w:color', XsdString)
+
+class CT_Left(BaseOxmlElement): 
+    w = OptionalAttribute('w:w', XsdInt)
+    type = OptionalAttribute('w:type', XsdString)
+    val = OptionalAttribute('w:val', XsdString)
+    sz = OptionalAttribute('w:sz', XsdInt)
+    space = OptionalAttribute('w:space', XsdInt)
+    color = OptionalAttribute('w:color', XsdString)
+
+class CT_Bottom(BaseOxmlElement): 
+    w = OptionalAttribute('w:w', XsdInt)
+    type = OptionalAttribute('w:type', XsdString)
+    val = OptionalAttribute('w:val', XsdString)
+    sz = OptionalAttribute('w:sz', XsdInt)
+    space = OptionalAttribute('w:space', XsdInt)
+    color = OptionalAttribute('w:color', XsdString)
+
+class CT_Right(BaseOxmlElement): 
+    w = OptionalAttribute('w:w', XsdInt)
+    type = OptionalAttribute('w:type', XsdString)
+    val = OptionalAttribute('w:val', XsdString)
+    sz = OptionalAttribute('w:sz', XsdInt)
+    space = OptionalAttribute('w:space', XsdInt)
+    color = OptionalAttribute('w:color', XsdString)
 
 class CT_TblpPr(BaseOxmlElement):
     """
@@ -430,33 +520,7 @@ class CT_TblBorders(BaseOxmlElement):
             side.sz = 4
             side.space = 0
             side.color = color
-        
-        
-
-class CT_TblBorderTop(BaseOxmlElement):
-    val = RequiredAttribute('w:val', XsdString)
-    sz = RequiredAttribute('w:sz', XsdInt)
-    space = RequiredAttribute('w:space', XsdInt)
-    color = RequiredAttribute('w:color', XsdString)
-
-class CT_TblBorderLeft(BaseOxmlElement):
-    val = RequiredAttribute('w:val', XsdString)
-    sz = RequiredAttribute('w:sz', XsdInt)
-    space = RequiredAttribute('w:space', XsdInt)
-    color = RequiredAttribute('w:color', XsdString)
-
-class CT_TblBorderRight(BaseOxmlElement):
-    val = RequiredAttribute('w:val', XsdString)
-    sz = RequiredAttribute('w:sz', XsdInt)
-    space = RequiredAttribute('w:space', XsdInt)
-    color = RequiredAttribute('w:color', XsdString)
-
-class CT_TblBorderBottom(BaseOxmlElement):
-    val = RequiredAttribute('w:val', XsdString)
-    sz = RequiredAttribute('w:sz', XsdInt)
-    space = RequiredAttribute('w:space', XsdInt)
-    color = RequiredAttribute('w:color', XsdString)
-
+             
 class CT_TblBorderInsideH(BaseOxmlElement):
     val = RequiredAttribute('w:val', XsdString)
     sz = RequiredAttribute('w:sz', XsdInt)

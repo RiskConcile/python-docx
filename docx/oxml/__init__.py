@@ -158,12 +158,13 @@ from .table import (  # noqa
     CT_TblLayoutType,
     CT_TblPr,
     CT_TblpPr,
+    CT_TblCellMar,
+    CT_Top,
+    CT_Bottom,
+    CT_Left,
+    CT_Right,
     CT_TblOverlap,
     CT_TblBorders,
-    CT_TblBorderTop,
-    CT_TblBorderLeft,
-    CT_TblBorderRight,
-    CT_TblBorderBottom,
     CT_TblBorderInsideH,
     CT_TblBorderInsideV,
     CT_TblWidth,
@@ -182,12 +183,13 @@ register_element_cls('w:tblGrid',    CT_TblGrid)
 register_element_cls('w:tblLayout',  CT_TblLayoutType)
 register_element_cls('w:tblPr',      CT_TblPr)
 register_element_cls('w:tblpPr',     CT_TblpPr)
+register_element_cls('w:tblCellMar', CT_TblCellMar)
+register_element_cls('w:top',        CT_Top)
+register_element_cls('w:left',       CT_Left)
+register_element_cls('w:bottom',     CT_Bottom)
+register_element_cls('w:right',      CT_Right)
 register_element_cls('w:tblOverlap', CT_TblOverlap)
 register_element_cls('w:tblBorders', CT_TblBorders)
-register_element_cls('w:top' ,       CT_TblBorderTop)
-register_element_cls('w:left' ,      CT_TblBorderLeft)
-register_element_cls('w:bottom' ,    CT_TblBorderBottom)
-register_element_cls('w:right' ,     CT_TblBorderRight)
 register_element_cls('w:insideH' ,   CT_TblBorderInsideH)
 register_element_cls('w:insideV' ,   CT_TblBorderInsideV)
 register_element_cls('w:tblStyle',   CT_String)

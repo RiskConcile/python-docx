@@ -67,6 +67,14 @@ class Table(Parented):
         self._tblPr.textWrap = value
 
     @property
+    def cellMargins(self):
+        return self._tblPr.cellMargins
+
+    @cellMargins.setter
+    def cellMargins(self, value):
+        self._tblPr.cellMargins = value
+
+    @property
     def autofit(self):
         """
         |True| if column widths can be automatically adjusted to improve the
