@@ -6,6 +6,7 @@ __version__ = '0.8.10'
 
 
 # register custom Part classes with opc package reader
+# Custom properties code from https://github.com/renejsum/python-docx
 
 from docx.opc.constants import CONTENT_TYPE as CT, RELATIONSHIP_TYPE as RT
 from docx.opc.part import PartFactory
