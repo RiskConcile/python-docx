@@ -6,7 +6,7 @@ Style-related objects
 
 A style is used to collect a set of formatting properties under a single name
 and apply those properties to a content object all at once. This promotes
-formatting consistency thoroughout a document and across related documents
+formatting consistency throughout a document and across related documents
 and allows formatting changes to be made globally by changing the definition
 in the appropriate style.
 
@@ -35,10 +35,10 @@ in the appropriate style.
        part, style_id
 
 
-|_CharacterStyle| objects
+|CharacterStyle| objects
 -------------------------
 
-.. autoclass:: _CharacterStyle()
+.. autoclass:: CharacterStyle()
    :show-inheritance:
    :members:
    :inherited-members:
@@ -46,10 +46,10 @@ in the appropriate style.
        element, part, style_id, type
 
 
-|_ParagraphStyle| objects
+|ParagraphStyle| objects
 -------------------------
 
-.. autoclass:: _ParagraphStyle()
+.. autoclass:: ParagraphStyle()
    :show-inheritance:
    :members:
    :inherited-members:

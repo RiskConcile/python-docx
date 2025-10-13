@@ -3,6 +3,68 @@
 Release History
 ---------------
 
+1.2.0 (2025-06-16)
+++++++++++++++++++
+
+- Add support for comments
+- Drop support for Python 3.8, add testing for Python 3.13
+
+
+1.1.2 (2024-05-01)
+++++++++++++++++++
+
+- Fix #1383 Revert lxml<=4.9.2 pin that breaks Python 3.12 install
+- Fix #1385 Support use of Part._rels by python-docx-template
+- Add support and testing for Python 3.12
+
+
+1.1.1 (2024-04-29)
+++++++++++++++++++
+
+- Fix #531, #1146 Index error on table with misaligned borders
+- Fix #1335 Tolerate invalid float value in bottom-margin
+- Fix #1337 Do not require typing-extensions at runtime
+
+
+1.1.0 (2023-11-03)
+++++++++++++++++++
+
+- Add BlockItemContainer.iter_inner_content()
+
+
+1.0.1 (2023-10-12)
+++++++++++++++++++
+
+- Fix #1256: parse_xml() and OxmlElement moved.
+- Add Hyperlink.fragment and .url
+
+
+1.0.0 (2023-10-01)
++++++++++++++++++++
+
+- Remove Python 2 support. Supported versions are 3.7+
+- Fix #85:   Paragraph.text includes hyperlink text
+- Add #1113: Hyperlink.address
+- Add Hyperlink.contains_page_break
+- Add Hyperlink.runs
+- Add Hyperlink.text
+- Add Paragraph.contains_page_break
+- Add Paragraph.hyperlinks
+- Add Paragraph.iter_inner_content()
+- Add Paragraph.rendered_page_breaks
+- Add RenderedPageBreak.following_paragraph_fragment
+- Add RenderedPageBreak.preceding_paragraph_fragment
+- Add Run.contains_page_break
+- Add Run.iter_inner_content()
+- Add Section.iter_inner_content()
+
+
+0.8.11 (2021-05-15)
++++++++++++++++++++
+
+- Small build changes and Python 3.8 version changes like collections.abc location.
+
+
 0.8.10 (2019-01-08)
 +++++++++++++++++++
 
