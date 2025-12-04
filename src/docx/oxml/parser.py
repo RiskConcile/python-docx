@@ -28,9 +28,10 @@ def parse_xml(xml: str | bytes) -> "BaseOxmlElement":
     """
     return cast("BaseOxmlElement", etree.fromstring(xml, oxml_parser))
 
+
 # configure XML parser
 parser_lookup = etree.ElementDefaultClassLookup()
-ct_parser = etree.XMLParser(remove_blank_text=True)
+ct_parser = etree.XMLParser(remove_blank_text=True, resolve_entities=False)
 ct_parser.set_element_class_lookup(parser_lookup)
 
 
