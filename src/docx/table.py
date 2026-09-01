@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Iterator, cast, overload
-
-from typing_extensions import TypeAlias
+from typing import TYPE_CHECKING, Iterator, TypeAlias, cast, overload
 
 from docx.blkcntnr import BlockItemContainer
 from docx.enum.style import WD_STYLE_TYPE

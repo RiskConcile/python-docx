@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, cast
-
-from typing_extensions import TypeAlias
+from typing import TYPE_CHECKING, TypeAlias, cast
 
 from docx.enum.dml import MSO_COLOR_TYPE
 from docx.oxml.simpletypes import ST_HexColorAuto

@@ -15,7 +15,7 @@ from docx.oxml.simpletypes import (
     ST_TblWidth,
     ST_TwipsMeasure,
     XsdInt,
-    XsdString
+    XsdString,
 )
 from docx.oxml.text.paragraph import CT_P
 from docx.oxml.xmlchemy import (
@@ -440,13 +440,13 @@ class CT_TblCellMar(BaseOxmlElement):
     @property
     def margins(self):
         mar = [None, None, None, None]
-        if not self.topMargin is None:
+        if self.topMargin is not None:
             mar[0] = self.topMargin.w
-        if not self.rightMargin is None:
+        if self.rightMargin is not None:
             mar[1] = self.rightMargin.w
-        if not self.bottomMargin is None:
+        if self.bottomMargin is not None:
             mar[2] = self.bottomMargin.w
-        if not self.leftMargin is None:
+        if self.leftMargin is not None:
             mar[3] = self.leftMargin.w
 
         return mar

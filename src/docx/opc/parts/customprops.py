@@ -1,23 +1,13 @@
-# encoding: utf-8
-
 """
 Custom properties part, corresponds to ``/docProps/custom.xml`` part in package.
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
-from lxml import etree
-
-from datetime import datetime
-
 from docx.opc.constants import CONTENT_TYPE as CT
 from docx.opc.customprops import CustomProperties
-from docx.oxml.customprops import CT_CustomProperties
-from docx.oxml.parser import ct_parse_xml
 from docx.opc.packuri import PackURI
 from docx.opc.part import XmlPart
+from docx.oxml.customprops import CT_CustomProperties
+from docx.oxml.parser import ct_parse_xml
 
 
 class CustomPropertiesPart(XmlPart):
@@ -25,15 +15,14 @@ class CustomPropertiesPart(XmlPart):
     Corresponds to part named ``/docProps/custom.xml``, containing the custom
     document properties for this document package.
     """
+
     @classmethod
     def default(cls, package):
         """
         Return a new |CustomPropertiesPart| object initialized with default
         values for its base properties.
         """
-        custom_properties_part = cls._new(package)
-        custom_properties = custom_properties_part.custom_properties
-        return custom_properties_part
+        return cls._new(package)
 
     @property
     def custom_properties(self):

@@ -15,7 +15,7 @@ from docx.opc.rel import Relationships
 from docx.shared import lazyproperty
 
 if TYPE_CHECKING:
-    from typing_extensions import Self
+    from typing import Self
 
     from docx.opc.coreprops import CoreProperties
     from docx.opc.part import Part

@@ -7,7 +7,7 @@ import textwrap
 from typing import TYPE_CHECKING, Any, Dict, Type, TypeVar
 
 if TYPE_CHECKING:
-    from typing_extensions import Self
+    from typing import Self
 
 _T = TypeVar("_T", bound="BaseXmlEnum")
 

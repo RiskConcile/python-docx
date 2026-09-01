@@ -13,6 +13,8 @@ from docx.api import Document
 if TYPE_CHECKING:
     from docx.opc.part import Part
 
+# -- keep in sync with `project.version` in pyproject.toml (uv_build
+# -- requires a static version, so it cannot be derived from here) --
 __version__ = "1.2.0"
 
 
@@ -26,7 +28,6 @@ from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.opc.part import PartFactory
 from docx.opc.parts.coreprops import CorePropertiesPart
 from docx.opc.parts.customprops import CustomPropertiesPart
-
 from docx.parts.comments import CommentsPart
 from docx.parts.document import DocumentPart
 from docx.parts.hdrftr import FooterPart, HeaderPart
