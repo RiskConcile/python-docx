@@ -3,6 +3,17 @@
 Release History
 ---------------
 
+1.3.0 (2026-09-01)
+++++++++++++++++++
+
+- Drop support for Python 3.9 and 3.10, require Python 3.11 or later
+- Update Sphinx, Jinja2, MarkupSafe, docutils and lxml to remediate security
+  advisories
+- Drop the ``typing_extensions`` runtime dependency, now that ``Self``,
+  ``TypeAlias`` and ``Protocol`` are available from ``typing``
+- Switch the build backend from setuptools to ``uv_build``
+
+
 1.2.0 (2025-06-16)
 ++++++++++++++++++
 

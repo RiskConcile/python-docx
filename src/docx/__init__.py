@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 # -- keep in sync with `project.version` in pyproject.toml (uv_build
 # -- requires a static version, so it cannot be derived from here) --
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 
 __all__ = ["Document"]
