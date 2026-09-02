@@ -1,0 +1,49 @@
+version: 2
+
+# Python deps: security updates only (version updates are off, see below).
+# Actions: all versions, major included.
+# Each ecosystem is collapsed into a single grouped PR.
+# Requires "Dependabot security updates" to be enabled in
+# Settings -> Code security.
+
+updates:
+  # Single uv project: runtime deps plus the `dev` / `docs` dependency groups of
+  # the root pyproject.toml, so security PRs fire for the toolchain too (pytest,
+  # ruff, Sphinx, ...). If that gets noisy, add per-dependency-name ignores below
+  # rather than splitting this into several entries.
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Security updates only. Version updates are off: deps here are declared as
+    # floating lower bounds (>=), so routine upgrades arrive via `uv lock` and a
+    # steady stream of bump PRs would only add noise.
+    # This entry must NOT be deleted -- it is what enables Python security PRs
+    # for the uv ecosystem at all.
+    # Do not add target-branch either -- that silently turns this into
+    # version-updates-only, and security updates would ignore the entry.
+    open-pull-requests-limit: 0
+    groups:
+      # Security PRs are not grouped unless a group opts in explicitly.
+      python-security:
+        applies-to: security-updates
+        patterns: ["*"]
+    ignore:
+      # Inert now that version updates are off (update-types applies to version
+      # updates only); kept so majors stay excluded if they are re-enabled.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # Actions used by .github/workflows/*.yml -- all versions, major included.
+  # No workflows exist yet; this entry is a no-op until the first one lands.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns: ["*"]
+      github-actions-security:
+        applies-to: security-updates
+        patterns: ["*"]

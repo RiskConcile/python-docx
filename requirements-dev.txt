@@ -1,7 +1,8 @@
 -r requirements-test.txt
-build
-ruff
-setuptools>=61.0.0
-tox
-twine
-types-lxml
+build>=1.2.2
+pyright>=1.1.401
+ruff>=0.11.13
+setuptools>=80.9.0
+tox>=4.26.0
+twine>=6.1.0
+types-lxml-multi-subclass>=2025.3.30

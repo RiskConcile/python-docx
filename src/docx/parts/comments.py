@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING, cast
-
-from typing_extensions import Self
+from typing import TYPE_CHECKING, Self, cast
 
 from docx.comments import Comments
 from docx.opc.constants import CONTENT_TYPE as CT

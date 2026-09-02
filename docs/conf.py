@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # python-docx documentation build configuration file, created by
 # sphinx-quickstart on Sat Jun 29 17:34:36 2013.
@@ -96,6 +95,8 @@ rst_epilog = """
 .. |Comments| replace:: :class:`.Comments`
 
 .. |CoreProperties| replace:: :class:`.CoreProperties`
+
+.. |CustomProperties| replace:: :class:`.CustomProperties`
 
 .. |datetime| replace:: :class:`.datetime.datetime`
 
@@ -390,4 +391,4 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {"http://docs.python.org/3/": None}
+intersphinx_mapping = {"python": ("https://docs.python.org/3/", None)}

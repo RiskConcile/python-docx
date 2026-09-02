@@ -8,9 +8,7 @@ specialized ones like structured document tags.
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Iterator
-
-from typing_extensions import TypeAlias
+from typing import TYPE_CHECKING, Iterator, TypeAlias
 
 from docx.oxml.table import CT_Tbl
 from docx.oxml.text.paragraph import CT_P

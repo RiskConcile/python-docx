@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=61.0.0"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.12.0,<0.13.0"]
+build-backend = "uv_build"
 
 [project]
 name = "python-docx"
@@ -9,43 +9,43 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Office/Business :: Office Suites",
     "Topic :: Software Development :: Libraries",
 ]
 dependencies = [
-    "lxml>=3.1.0",
-    "typing_extensions>=4.9.0",
+    "lxml>=5.4.0",
 ]
 description = "Create, read, and update Microsoft Word .docx files."
-dynamic = ["version"]
 keywords = ["docx", "office", "openxml", "word"]
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
+version = "1.3.0"
 
 [dependency-groups]
 dev = [
-    "Jinja2==2.11.3",
-    "MarkupSafe==0.23",
-    "Sphinx==1.8.6",
-    "alabaster<0.7.14",
     "behave>=1.2.6",
+    "build>=1.2.2",
     "pyparsing>=3.2.3",
     "pyright>=1.1.401",
     "pytest>=8.4.0",
+    "pytest-cov>=6.1.1",
+    "pytest-xdist>=3.7.0",
     "ruff>=0.11.13",
     "tox>=4.26.0",
     "twine>=6.1.0",
     "types-lxml-multi-subclass>=2025.3.30",
+    {include-group = "docs"},
+]
+docs = [
+    "Sphinx>=8.2.3",
 ]
 
 [project.urls]
@@ -57,7 +57,7 @@ Repository = "https://github.com/python-openxml/python-docx"
 [tool.pyright]
 include = ["src/docx", "tests"]
 pythonPlatform = "All"
-pythonVersion = "3.9"
+pythonVersion = "3.11"
 reportImportCycles = false
 reportUnnecessaryCast = true
 reportUnnecessaryTypeIgnoreComment = true
@@ -96,7 +96,7 @@ python_functions = ["it_", "its_", "they_", "and_", "but_"]
 [tool.ruff]
 exclude = []
 line-length = 100
-target-version = "py38"
+target-version = "py311"
 
 [tool.ruff.lint]
 ignore = [
@@ -122,6 +122,17 @@ select = [
 known-first-party = ["docx"]
 known-local-folder = ["helpers"]
 
-[tool.setuptools.dynamic]
-version = {attr = "docx.__version__"}
+[tool.uv.build-backend]
+# -- distribution is `python-docx` but the importable module is `docx` --
+module-name = "docx"
+# -- uv_build ignores MANIFEST.in; these keep the sdist self-testable --
+source-include = [
+    "HISTORY.rst",
+    "docs/**",
+    "features/**",
+    "requirements*.txt",
+    "tests/**",
+    "tox.ini",
+]
+source-exclude = ["docs/.build/**"]
 

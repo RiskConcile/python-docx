@@ -1,20 +1,14 @@
-# encoding: utf-8
-
 """
 lxml custom element classes for core properties-related XML elements.
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 import re
-
 from datetime import datetime, timedelta
-from lxml import etree
-from docx.oxml.ns import nsdecls, qn
-from docx.oxml.xmlchemy import BaseOxmlElement, ZeroOrOne
+
 from docx.oxml import ct_parse_xml
+from docx.oxml.ns import nsdecls, qn
+from docx.oxml.xmlchemy import BaseOxmlElement
+
 
 class CT_CustomProperties(BaseOxmlElement):
     """
@@ -24,7 +18,8 @@ class CT_CustomProperties(BaseOxmlElement):
     """
 
     _customProperties_tmpl = (
-        '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/custom-properties" %s/>\n' % nsdecls('vt')
+        '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument'
+        '/2006/custom-properties" %s/>\n' % nsdecls("vt")
     )
 
     @classmethod
@@ -75,7 +70,7 @@ class CT_CustomProperties(BaseOxmlElement):
         td = timedelta(hours=hours, minutes=minutes)
         return dt + td
 
-    _offset_pattern = re.compile('([+-])(\d\d):(\d\d)')
+    _offset_pattern = re.compile(r"([+-])(\d\d):(\d\d)")
 
     @classmethod
     def _parse_W3CDTF_to_datetime(cls, w3cdtf_str):

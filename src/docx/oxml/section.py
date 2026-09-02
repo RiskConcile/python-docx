@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import Callable, Iterator, List, Sequence, cast
+from typing import Callable, Iterator, List, Sequence, TypeAlias, cast
 
 from lxml import etree
-from typing_extensions import TypeAlias
 
 from docx.enum.section import WD_HEADER_FOOTER, WD_ORIENTATION, WD_SECTION_START
 from docx.oxml.ns import nsmap

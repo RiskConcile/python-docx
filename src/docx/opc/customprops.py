@@ -1,17 +1,12 @@
-# encoding: utf-8
-
 """
 The :mod:`pptx.packaging` module coheres around the concerns of reading and
 writing presentations to and from a .pptx file.
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-
 from lxml import etree
 
 NS_VT = "http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"
+
 
 class CustomProperties(object):
     """
