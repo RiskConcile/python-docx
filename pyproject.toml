@@ -122,6 +122,9 @@ select = [
 known-first-party = ["docx"]
 known-local-folder = ["helpers"]
 
+[tool.uv]
+exclude-newer = "7 days"
+
 [tool.uv.build-backend]
 # -- distribution is `python-docx` but the importable module is `docx` --
 module-name = "docx"
