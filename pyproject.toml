@@ -1,5 +1,5 @@
 [build-system]
-requires = ["uv_build>=0.12.0,<0.13.0"]
+requires = ["uv_build>=0.13.0,<0.14.0"]
 build-backend = "uv_build"
 
 [project]
@@ -124,6 +124,8 @@ known-local-folder = ["helpers"]
 
 [tool.uv]
 exclude-newer = "7 days"
+# -- security fixes released inside the 7-day window; drop once they age out --
+exclude-newer-package = { certifi = "2026-10-21", virtualenv = "2026-10-21" }
 
 [tool.uv.build-backend]
 # -- distribution is `python-docx` but the importable module is `docx` --
