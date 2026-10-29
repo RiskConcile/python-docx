@@ -125,7 +125,7 @@ known-local-folder = ["helpers"]
 [tool.uv]
 exclude-newer = "7 days"
 # -- security fixes released inside the 7-day window; drop once they age out --
-exclude-newer-package = { certifi = "2026-10-21", virtualenv = "2026-10-21" }
+exclude-newer-package = { virtualenv = "2026-10-23T00:00:00Z" }
 
 [tool.uv.build-backend]
 # -- distribution is `python-docx` but the importable module is `docx` --
